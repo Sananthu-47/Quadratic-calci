@@ -1,0 +1,195 @@
+<!--   Created by Ananthu SV
+       Date:18/04/20
+       @copyright by Ananthu
+       Please ask my permission before copying the code.     --><!doctype html><html><head> 
+  <title>Quadratic Calci</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <style type="text/css" id="dcoder_stylesheet">body {
+    background-color:rgba(10,40,0,.4);
+    padding:0;
+    margin:0;
+    box-sizing:border-box ;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#wrap
+{
+    width:400px;
+    height:550px;
+    overflow-y:scroll ;
+    overflow-x:scroll;
+}
+
+#heading
+{
+    font-family:serif;
+    font-size:30px;
+    text-transform:uppercase;
+    color:rgba(30,40,0,.4);
+    text-shadow:1.5px 1.5px .6px rgba(24,15,20,.6);
+}
+
+label
+{
+    color:rgba(70,40,20,.6);
+    font-size:20px;
+    font-weight:600;
+}
+
+#input-div
+{
+    width:250px;
+    height:180px;
+    border:2px solid rgb(100,40,50);
+}
+
+#type
+{
+    margin-top:0;
+    margin-bottom:0;
+    font-size:20px;
+    font-weight:300;
+}
+
+
+
+input
+{
+    width:calc(100% - 40%);
+    height:30px;
+    border-radius:20px;
+    border:none;
+    margin-top:10px;
+    padding-left:10px;
+    outline:none;
+}
+
+
+#result
+{
+    font-size:16px;
+    letter-spacing:3px;
+    color:rgba(10,6,3,.9);
+    margin-top:-10px;
+}
+
+
+#calculate,#clear
+{
+    width:100px;
+    height:40px;
+    border:none;
+    border-radius:20px;
+    margin-top:10px;
+    text-transform:uppercase;
+    color:white;
+    font-weight:700;
+    outline:none;
+    cursor:pointer;
+}
+
+#calculate
+{
+    background-color:green;
+}
+
+#clear
+{
+    background-color:red;
+}
+
+#result-head
+{
+    color:tomato;
+    text-transform:uppercase;
+    margin-left:-150px;
+}
+
+
+@media only screen and (min-height:800px){
+    #wrap
+    {
+        margin-top:200px;
+        width:600px;
+        height:600px;
+    }
+    #heading
+    {
+      
+      font-size:50px;
+    }
+}</style></head> 
+ <body> 
+  <div id="wrap"> 
+   <center> 
+    <h1 id="heading">Quadratic calci</h1> 
+    <div id="input-div"> 
+     <h2 id="type">ax<sup>2</sup>+bx+c</h2> 
+     <label for="a">a:</label> 
+     <input type="number" id="a" placeholder="coefficient of a">
+     <br> 
+     <label for="b">b:</label> 
+     <input type="number" id="b" placeholder="coefficient of b">
+     <br> 
+     <label for="c">c:</label> 
+     <input type="number" id="c" placeholder="coefficient of c"> 
+    </div> 
+    <button id="calculate">Calculate</button> 
+    <button id="clear">Clear</button> 
+    <h4 id="result-head">Result:</h4> 
+    <h5 id="result"></h5> 
+   </center> 
+  </div> 
+  <script>
+        
+        // All the variables needed
+            var a=document.getElementById("a");
+var b=document.getElementById("b");
+var c=document.getElementById("c");
+var x1=0,x2=0;
+var result =document.getElementById("result");
+var d;
+
+//Calculate button functionality 
+ document.getElementById("calculate").addEventListener("click",()=>{
+ //Check the discriminant
+ 
+d=(b.value*b.value-4*a.value*c.value);
+
+//if discriminant is greater than 0 you will get two real part roots
+
+ if(d>0)
+ {
+     x1=(-b.value+(Math.sqrt(d)))/2*a.value;
+     x2=(-b.value-(Math.sqrt(d)))/2*a.value;
+     result.innerHTML=`root1= ${x1.toPrecision(4)}<br/> root2= ${x2.toPrecision(4)}`;
+}else
+// if discriminant is equal to 0 then both the roots have same roots
+if(d==0)
+{
+  x1=(-b.value+(Math.sqrt(d)))/2*a.value;
+    result.innerHTML="root1=root2= "+x1.toPrecision(4);
+}else
+// else the roots are having two roots with imaginary parts also
+{
+    
+ var   x1=(-b.value)/2*a.value;
+   var  x2=(-b.value)/2*a.value;
+     var img= Math.sqrt(-d)/(2*a.value); 
+    result.innerHTML=`root1= ${x1}+i${img.toPrecision(3)}<br/>root2= ${x2}-i${img.toPrecision(3)}`;
+}
+ });
+
+// Clear button functionality
+
+document.getElementById("clear").addEventListener("click",()=>{
+    a.value="";
+    b.value="";
+    c.value="";
+});
+
+        </script> 
+ 
+</body></html>
